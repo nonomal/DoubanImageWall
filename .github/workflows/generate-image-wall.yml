@@ -12,12 +12,12 @@ jobs:
     steps:
 
       - name: checkout repo content
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10.0'
+          python-version: '3.12'
           
       - name: install python packages
         run: |
@@ -25,10 +25,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: execute py script to generate movie poster wall
-        run: python image_wall.py -i=49729399 -c=18 -r=8 -o=8 -rd=True
+        run: python image_wall.py -i=${{ secrets.DOUBAN_ID }} -c=18 -r=8 -o=8 -rd=True
 
       - name: execute py script to generate album cover wall
-        run: python image_wall.py -i=49729399 -m='music' -c=10 -r=8 -o=8 -rd=True -s=True
+        run: python image_wall.py -i=${{ secrets.DOUBAN_ID }} -m='music' -c=10 -r=8 -o=8 -rd=True -s=True
           
       - name: commit files
         run: |
